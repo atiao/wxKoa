@@ -1,0 +1,1 @@
+./bin/sunny clientid id
