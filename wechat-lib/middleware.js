@@ -34,22 +34,22 @@ module.exports = (opts, reply)=>{
             const Message = Util.FormatMessage(Content.xml);
             context.weixin = Message;
 
-            // await reply.apply(context, [context, next]);
-            // const ReplyBody = context.body;
-            // const Msg = context.weixin;
-            // const Xml = Util.Tpl(ReplyBody, Msg);
+            await reply.apply(context, [context, next]);
+            const ReplyBody = context.body;
+            const Msg = context.weixin;
+            const Xml = Util.Tpl(ReplyBody, Msg);
             context.status = 200;
             context.type = "application/xml";
-            const Xml = `
-                 <xml>
-                    <ToUserName><![CDATA[${Message.FromUserName}]]></ToUserName>
-                    <FromUserName><![CDATA[${Message.ToUserName}]]></FromUserName>
-                    <CreateTime>${parseInt(new Date().getTime() /1000, 0) + ''}</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA[${Message.Content}]]></Content>
-                    <MsgId>1234567890123456</MsgId>
-                </xml>
-            `
+            // const Xml = `
+            //      <xml>
+            //         <ToUserName><![CDATA[${Message.FromUserName}]]></ToUserName>
+            //         <FromUserName><![CDATA[${Message.ToUserName}]]></FromUserName>
+            //         <CreateTime>${parseInt(new Date().getTime() /1000, 0) + ''}</CreateTime>
+            //         <MsgType><![CDATA[text]]></MsgType>
+            //         <Content><![CDATA[${Message.Content}]]></Content>
+            //         <MsgId>1234567890123456</MsgId>
+            //     </xml>
+            // `
             context.body = Xml;
         }
     };
