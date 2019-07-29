@@ -4,7 +4,6 @@ const base = 'https://api.weixin.qq.com/cgi-bin/';
 const api = {
     accessToken: base + 'token?grant_type=client_credential',
 }
-console.log(333)
 
 module.exports = class Wechat {
     
@@ -13,6 +12,8 @@ module.exports = class Wechat {
         this.opts = Object.assign({}, opts);
         this.appID = opts.appID;
         this.appSecret = opts.appSecret;
+        this.getAccessToken = opts.getAccessToken;
+        this.saveAccessToken = opts.saveAccessToken;
         this.fetchAccessToken()
     }
 
@@ -27,12 +28,8 @@ module.exports = class Wechat {
     }
 
     async fetchAccessToken() {
-        console.log(555,data)
-        let data
-        if(this.getAccessToken) {
-            data = await this.getAccessToken()
-        }
-
+        let data = await this.getAccessToken()
+       
         if(!this.isValidToken(data)) {
             data = await this.updateAccessToken()
         }
@@ -46,12 +43,14 @@ module.exports = class Wechat {
 
         const now = new Date().getTime()
         console.log('update',data)
-        const expiresIn = now + (data.expires_in - 20) *1000
+        const expiresIn = now + (data.expires_in - 20) * 1000
         data.expiresIn = expiresIn
+
+        await this.saveAccessToken(data)
         return data
     }
 
-    isValidToken() {
+    isValidToken(data) {
         if(!data || !data.expires_in) {
             return false
         }

@@ -5,5 +5,7 @@ const WECHAT = {
 };
 
 module.exports = {
-    WECHAT
+    WECHAT,
+    port: 3006,
+    db: 'mongodb://localhost/wxKoa'
 }
