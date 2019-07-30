@@ -4,8 +4,8 @@ const Util = require('./util');
 
 module.exports = (opts, reply)=>{
     return async (context, next)=>{
-        console.log(777,opts)
-        console.log(6666,context)
+        // console.log(777,opts)
+        // console.log(6666,context)
         let {
             signature,
             timestamp,

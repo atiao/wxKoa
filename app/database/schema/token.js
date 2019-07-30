@@ -52,4 +52,4 @@ TokenSchema.statics = {
         return data;
     },
 };
-const Token = Mongoose.model('Token', TokenSchema);
+const Token = Mongoose.model('Token', TokenSchema, 'tokens');

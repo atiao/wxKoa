@@ -26,4 +26,4 @@ exports.test = async ()=> {
     
     console.log('dataindb',data)    
 
-}
+}     

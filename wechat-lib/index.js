@@ -56,7 +56,7 @@ module.exports = class Wechat {
         }
 
         const expiresIn = data.expires_in
-        const now = new Date.getTime()
+        const now = new Date().getTime()
 
         if(now < expiresIn) {
             return true
